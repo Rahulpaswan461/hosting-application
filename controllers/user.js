@@ -35,21 +35,20 @@ async function hanldeSigninUser(req,res){
     }
     catch(error){
         console.log("ther is some error",error)
-        return res.status(500).json({msg:"Internal Server error",error})
+        return res.status(500).json({msg:`Internal Server error ${error}`,error})
     }
 }
-async function getAllTheAvailableUser(req,res){
-    try{
-         const userData = await User.find({})
-         if(!userData){
-            return res.status(400).json({msg:"No information available !!"})
-         }
+async function getAllTheAvailableUser(req, res) {
+    try {
+        const userData = await User.find({});
+        if (!userData || userData.length === 0) { // Check if userData is empty array
+            return res.status(404).json({ msg: "No information available !!" });
+        }
 
-         return res.status(200).json(userData)
-    }
-    catch(error){
-        console.log("There is some error",error)
-        return res.status(500).json({msg:"Internal Server error",error})
+        return res.status(200).json(userData);
+    } catch (error) {
+        console.error("Error occurred while fetching users:", error);
+        return res.status(500).json({ msg: `Internal Server error ${error}` });
     }
 }
 

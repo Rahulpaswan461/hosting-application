@@ -39,7 +39,7 @@ async function getAllTheAvailableBooks(req,res){
     }
     catch(error){
         console.log("There is some error")
-        return res.status(500).json({msg:"Internal server error"})
+        return res.status(500).json({msg:"Internal server error",err:error})
     }
 }
 module.exports ={
