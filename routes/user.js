@@ -7,5 +7,8 @@ const router = express.Router()
 router.post('/signup',hanldeSignupUser)
 router.post("/signin",checkForAuthenticateUser("token"),hanldeSigninUser)
 router.get("/allusers",getAllTheAvailableUser)
+router.get("/data",(req,res)=>{
+    return res.status(200).json({msg:"Successs !!!!!"})
+})
 
 module.exports = router
